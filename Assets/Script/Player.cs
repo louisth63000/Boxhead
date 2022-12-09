@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,22 +5,21 @@ public class Player : MonoBehaviour
 	public float speed;
 	public Rigidbody2D rigidBody2D;
 	private Vector3 startPosition;
-	private Vector3 mousePos;
 	private float movementV;
 	private float movementH;
-	public int distanceshoot;
 	public float rapidfire;
 	public float addfire;
 	
-	public LineRenderer lineRenderer;
-	public Camera camera;
+	public Transform spawnbullet;
+
+	public GameObject bulletprefab;
+
+	public float speedbullet;
+
     void Start()
     {
-		lineRenderer = GetComponent<LineRenderer>();
         startPosition = transform.position;
-		lineRenderer.SetWidth(0f,0.8f);
 		rapidfire=0f;
-		camera =Camera.main;
     }
 
     // Update is called once per frame
@@ -31,21 +28,20 @@ public class Player : MonoBehaviour
 		rapidfire+=addfire;
 		movementV = Input.GetAxis("Vertical");
 		movementH = Input.GetAxis("Horizontal");
-		mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
+		
+		Vector3 mouseposition = Input.mousePosition;
+		mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
 
-		rigidBody2D.velocity = new Vector2(movementH, movementV) * speed;
-		Debug.DrawRay(new Vector2(transform.position.x+0.20f,transform.position.y+0.5f),mousePos,Color.red,2f,false);
-		lineRenderer.SetPosition(0,new Vector2(transform.position.x+0.20f,transform.position.y+0.25f));
-		lineRenderer.SetPosition(1,mousePos);
-
+		Vector2 direction = new Vector2(mouseposition.x - transform.position.x , mouseposition.y - transform.position.y);
+		
+		transform.up = direction;
+		transform.position = new Vector2(transform.position.x+ (movementH* speed),transform.position.y+ (movementV * speed));
+		
 		if(Input.GetAxis("Fire1") == 1 &&  rapidfire > 1)
 		{
-			RaycastHit2D hit = Physics2D.Raycast( new Vector2(transform.position.x+1,transform.position.y+1),mousePos,distanceshoot);
-			if(hit.collider != null)
-			{
-				Debug.Log(hit.collider.name);
-			}
-			rapidfire=0f;
+			rapidfire=0;
+			var bullet = Instantiate(bulletprefab,spawnbullet.position,spawnbullet.rotation);
+			bullet.GetComponent<Rigidbody2D>().velocity = spawnbullet.up * speedbullet;
 		}
 		
     }
