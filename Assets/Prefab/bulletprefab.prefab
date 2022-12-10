@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vie: 1
+  degat: 15
 --- !u!212 &212425602171136142
 SpriteRenderer:
   m_ObjectHideFlags: 1

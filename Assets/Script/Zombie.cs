@@ -5,9 +5,11 @@ using UnityEngine;
 public class Zombie : MonoBehaviour
 {
 
+    public int vie=100;
     public float speed;
     public float range;
 
+    private bool attactkbool=false;
 	public GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -15,6 +17,11 @@ public class Zombie : MonoBehaviour
         
     }
 
+    void testcollision()
+    {
+        
+
+    }
     // Update is called once per frame
     void Update()
     {

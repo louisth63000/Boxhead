@@ -56,6 +56,7 @@
      <Compile Include="Assets\Script\bullet.cs" />
      <Compile Include="Assets\Script\Player.cs" />
      <Compile Include="Assets\Script\Zombie.cs" />
+     <Compile Include="Assets\Script\ZombieManager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>P:/Boxhead/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

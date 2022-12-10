@@ -45,4 +45,8 @@ public class Player : MonoBehaviour
 		}
 		
     }
+	void OnTriggerEnter2D(Collider2D col)
+    {
+		Debug.Log("Collision du joueur avec  " + col.tag);
+	}
 }
