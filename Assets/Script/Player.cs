@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+	public int vie=100;
 	public float speed;
 	public Rigidbody2D rigidBody2D;
 	private Vector3 startPosition;
@@ -47,6 +48,17 @@ public class Player : MonoBehaviour
     }
 	void OnTriggerEnter2D(Collider2D col)
     {
-		Debug.Log("Collision du joueur avec  " + col.tag);
+		if (col.tag == "Zombie")
+		{
+			var zombie=col.gameObject.GetComponent<Zombie>();
+			zombie.testcollision();
+			
+			if(zombie.timeattact >10)
+			{
+				zombie.timeattact=0;
+				vie-=15;
+				Debug.Log("La vie du joueur est  " + vie);
+			}
+		}
 	}
 }
