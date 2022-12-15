@@ -7,6 +7,7 @@ public class bullet : MonoBehaviour {
 	// Use this for initialization
 	public float vie=0f;
 	public int degat=5;
+	public GameObject Scoremanager;
 	void Awake () 
 	{
 		Destroy(gameObject,vie);	
@@ -21,6 +22,7 @@ public class bullet : MonoBehaviour {
 			if(zombie.vie < 0)
 			{
 				Destroy(col.gameObject,0.2f);
+				Scoremanager.GetComponent<ScoreManager>().KillZombie();
 			}
 		}
     }

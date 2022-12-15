@@ -16,11 +16,13 @@ public class Player : MonoBehaviour
 	public GameObject bulletprefab;
 
 	public float speedbullet;
+	public GameObject scoreManager;
 
     void Start()
     {
         startPosition = transform.position;
 		rapidfire=0f;
+		scoreManager= GameObject.FindGameObjectWithTag("Score");
     }
 
     // Update is called once per frame
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
 			rapidfire=0;
 			var bullet = Instantiate(bulletprefab,spawnbullet.position,spawnbullet.rotation);
 			bullet.GetComponent<Rigidbody2D>().velocity = spawnbullet.up * speedbullet;
+			bullet.GetComponent<bullet>().Scoremanager=scoreManager;
 		}
 		
     }
@@ -53,7 +56,7 @@ public class Player : MonoBehaviour
 			var zombie=col.gameObject.GetComponent<Zombie>();
 			zombie.testcollision();
 			
-			if(zombie.timeattact >10)
+			if(zombie.timeattact >5)
 			{
 				zombie.timeattact=0;
 				vie-=15;

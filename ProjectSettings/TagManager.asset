@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mur
   - Zombie
+  - Score
   layers:
   - Default
   - TransparentFX
