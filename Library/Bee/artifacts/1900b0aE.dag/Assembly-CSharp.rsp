@@ -37,6 +37,7 @@
 -define:USE_PROPERTY_DATABASE
 -define:USE_QUERY_BUILDER
 -define:USE_SEARCH_EXTENSION_API
+-define:UNITY_ANALYTICS
 -define:ENABLE_AR
 -define:ENABLE_AUDIO
 -define:ENABLE_CACHING
@@ -373,10 +374,12 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.XR.LegacyInputHelpers.ref.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.2.1f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.2.1f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-"Assets/Nav.cs"
+"Assets/Script/Arme.cs"
 "Assets/Script/bullet.cs"
+"Assets/Script/Gun.cs"
 "Assets/Script/Player.cs"
 "Assets/Script/ScoreManager.cs"
+"Assets/Script/ShotGun.cs"
 "Assets/Script/Zombie.cs"
 "Assets/Script/ZombieManager.cs"
 -langversion:9.0

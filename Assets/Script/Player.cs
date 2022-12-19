@@ -1,34 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
 	public int vie=100;
 	public float speed;
-	public Rigidbody2D rigidBody2D;
-	private Vector3 startPosition;
+
 	private float movementV;
 	private float movementH;
-	public float rapidfire;
-	public float addfire;
-	
-	public Transform spawnbullet;
 
-	public GameObject bulletprefab;
+	private int indexArme=0;
 
-	public float speedbullet;
+	public Rigidbody2D rigidBody2D;
+
+	private Vector3 startPosition;
+
 	public GameObject scoreManager;
+
+	public List<Arme> listArme=new List<Arme>();
 
     void Start()
     {
         startPosition = transform.position;
-		rapidfire=0f;
 		scoreManager= GameObject.FindGameObjectWithTag("Score");
     }
+
+	void switchArme(float scrollInput)
+	{
+		if (scrollInput != 0)
+		{
+			if (scrollInput < 0)
+			{
+				if (indexArme <= 0)
+				{
+					indexArme = listArme.Count -1;
+					listArme[indexArme].Active();
+					listArme[0].Desactive();
+				}else
+				{
+					indexArme -= 1;
+					listArme[indexArme].Active();
+					listArme[indexArme + 1].Desactive();
+				}
+			}else
+			{
+				if (indexArme == listArme.Count -1)
+				{
+					indexArme= 0 ;
+					listArme[indexArme].Active();
+					listArme[listArme.Count -1].Desactive();
+				}else
+				{
+					indexArme+= 1;
+					listArme[indexArme].Active();;
+					listArme[indexArme - 1].Desactive();
+				}
+			}
+			
+		}
+	}
 
     // Update is called once per frame
     void Update()
     {
-		rapidfire+=addfire;
 		movementV = Input.GetAxis("Vertical");
 		movementH = Input.GetAxis("Horizontal");
 		
@@ -40,15 +75,10 @@ public class Player : MonoBehaviour
 		transform.up = direction;
 		transform.position = new Vector2(transform.position.x+ (movementH* speed),transform.position.y+ (movementV * speed));
 		
-		if(Input.GetAxis("Fire1") == 1 &&  rapidfire > 1)
-		{
-			rapidfire=0;
-			var bullet = Instantiate(bulletprefab,spawnbullet.position,spawnbullet.rotation);
-			bullet.GetComponent<Rigidbody2D>().velocity = spawnbullet.up * speedbullet;
-			bullet.GetComponent<bullet>().Scoremanager=scoreManager;
-		}
-		
+		float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+		switchArme(scrollInput);
     }
+
 	void OnTriggerEnter2D(Collider2D col)
     {
 		if (col.tag == "Zombie")
