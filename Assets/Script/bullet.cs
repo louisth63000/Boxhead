@@ -18,7 +18,7 @@ public class bullet : MonoBehaviour {
 		if (col.tag == "Zombie")
 		{
 			Zombie zombie=col.gameObject.GetComponent<Zombie>();
-			zombie.vie -=5;
+			zombie.vie -=degat;
 			if(zombie.vie < 0)
 			{
 				Destroy(col.gameObject,0.2f);

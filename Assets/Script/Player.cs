@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 	{
 		if (scrollInput != 0)
 		{
-			if (scrollInput < 0)
+			if (scrollInput < -0.04f)
 			{
 				if (indexArme <= 0)
 				{
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 					listArme[indexArme].Active();
 					listArme[indexArme + 1].Desactive();
 				}
-			}else
+			}else if (scrollInput >  0.04f)
 			{
 				if (indexArme == listArme.Count -1)
 				{
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
 				}else
 				{
 					indexArme+= 1;
-					listArme[indexArme].Active();;
+					listArme[indexArme].Active();
 					listArme[indexArme - 1].Desactive();
 				}
 			}

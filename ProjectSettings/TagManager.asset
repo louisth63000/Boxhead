@@ -7,6 +7,7 @@ TagManager:
   - Mur
   - Zombie
   - Score
+  - Mine
   layers:
   - Default
   - TransparentFX
