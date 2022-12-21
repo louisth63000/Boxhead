@@ -9,7 +9,7 @@ public class Arme : MonoBehaviour
     public float rapidfire;
 	public float addfire;
     public float speedbullet;
-    public string name;
+    public string Aname;
     public Transform spawnbullet;
     public GameObject bulletprefab;
 	public GameObject scoreManager;
@@ -35,8 +35,9 @@ public class Arme : MonoBehaviour
     void Update()
     {
         rapidfire+=addfire;
-        if(Input.GetAxis("Fire1") == 1 &&  rapidfire > 1)
+        if(Input.GetAxis("Fire1") == 1 &&  rapidfire > 1 && currentAmmount > 0)
 		{
+            currentAmmount -=1;
 			rapidfire=0;
 			fire();
 		}

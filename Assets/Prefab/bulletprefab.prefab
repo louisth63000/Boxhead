@@ -161,6 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a870ec055d8790a41bd25ec4bc46884b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vie: 1
-  degat: 15
+  vie: 3
+  degat: 34
   Scoremanager: {fileID: 0}

@@ -28,7 +28,7 @@ public class bulletRocket : MonoBehaviour
                 zombie.vie -=degat;
                 if(zombie.vie < 0)
                 {
-                    Destroy(col.gameObject,0.2f);
+                    Destroy(col.gameObject,0f);
                     Scoremanager.GetComponent<ScoreManager>().KillZombie();
                 }
                 Destroy(gameObject,0.2f);

@@ -26,7 +26,7 @@ public class ZombieManager : MonoBehaviour {
 		listSpawn.Add(spawn3);
 		listSpawn.Add(spawn4);
 		compteur=0;
-		compteurMax=15;
+		compteurMax=10;
 
 	}
 	
@@ -48,7 +48,7 @@ public class ZombieManager : MonoBehaviour {
 					{
 						Debug.Log("Nouvelle manche");
 						compteur=0;
-						compteurMax+=15;
+						compteurMax= (int) (compteurMax* 1.4f);
 					}
 			}
 		}

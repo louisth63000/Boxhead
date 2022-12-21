@@ -336,8 +336,8 @@ Transform:
   - {fileID: 63492754}
   - {fileID: 477227205}
   - {fileID: 1607618212}
-  - {fileID: 99216962}
   - {fileID: 584143695}
+  - {fileID: 99216962}
   - {fileID: 1042367787}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -452,7 +452,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8773585, g: 0.4452464, b: 0.12829298, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -475,11 +475,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAmmount: 0
-  Ammountmax: 0
+  Ammountmax: 25
   rapidfire: 10
   addfire: 0.01
   speedbullet: 15
-  name: fghj
+  Aname: Rocket
   spawnbullet: {fileID: 63492754}
   bulletprefab: {fileID: 3452279573536487859, guid: 3c4745e2d6f6942458ff4c30895ca52d,
     type: 3}
@@ -1696,12 +1696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356fddc27d6f5a043b46daf5a7e22f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmount: 0
-  Ammountmax: 0
-  rapidfire: 10
-  addfire: 0.1
-  speedbullet: 5
-  name: Test
+  currentAmmount: 100
+  Ammountmax: 300
+  rapidfire: 0
+  addfire: 0.005
+  speedbullet: 8
+  Aname: Gun
   spawnbullet: {fileID: 63492754}
   bulletprefab: {fileID: 1544000694514044, guid: 2a449c8afa438db4ab186c35a640aae6,
     type: 3}
@@ -2087,13 +2087,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAmmount: 0
-  Ammountmax: 0
+  Ammountmax: 25
   rapidfire: 1
   addfire: 0.01
   speedbullet: 8
-  name: etdth
+  Aname: ShotGun
   spawnbullet: {fileID: 63492754}
-  bulletprefab: {fileID: 1544000694514044, guid: 2a449c8afa438db4ab186c35a640aae6,
+  bulletprefab: {fileID: 3240906638871993467, guid: 1ed05638fcf2226479827e347e42657e,
     type: 3}
   scoreManager: {fileID: 0}
   cptbullet: 10
@@ -4313,7 +4313,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3786935, g: 0.6981132, b: 0.4474064, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4336,11 +4336,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAmmount: 0
-  Ammountmax: 0
+  Ammountmax: 10
   rapidfire: 10
   addfire: 0.01
   speedbullet: 5
-  name: bhjkl
+  Aname: Mines
   spawnbullet: {fileID: 67644011}
   bulletprefab: {fileID: 5630464618659417789, guid: a180f73b4ae858146958a12687c03588,
     type: 3}
@@ -4357,7 +4357,7 @@ GameObject:
   - component: {fileID: 1337944011}
   m_Layer: 0
   m_Name: ZombieManager
-  m_TagString: Untagged
+  m_TagString: ZombieManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4433,8 +4433,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   combot: 1
+  comboMax: 0
   currenttimerCombot: 0
-  timerCombot: 5
+  timerCombot: 2
+  AccessAmount: 0
 --- !u!4 &1476342247
 Transform:
   m_ObjectHideFlags: 0
@@ -4525,7 +4527,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f09eae8c0ea04254b90c5386a034a225, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.2544945, g: 0.4056604, b: 0.2700096, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4548,11 +4550,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAmmount: 0
-  Ammountmax: 0
+  Ammountmax: 300
   rapidfire: 10
-  addfire: 0.1
-  speedbullet: 5
-  name: Test
+  addfire: 0.02
+  speedbullet: 6
+  Aname: Uzi
   spawnbullet: {fileID: 63492754}
   bulletprefab: {fileID: 1544000694514044, guid: 2a449c8afa438db4ab186c35a640aae6,
     type: 3}
