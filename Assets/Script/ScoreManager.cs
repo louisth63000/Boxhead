@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour {
 	public int score;
-	public int combot;
-	public int comboMax;
+	public int combot=1;
+	public int comboMax=50;
+	public Image combotImage;
 	public float currenttimerCombot;
 	public float timerCombot;
 	public TMP_Text scoreText;
@@ -61,7 +63,7 @@ public class ScoreManager : MonoBehaviour {
 			currenttimerCombot=timerCombot;
 
 		}     
-       
+		combotImage.fillAmount=(float)combot/ (float)comboMax;
 	}
 	public void UpdateScore()
 	{
