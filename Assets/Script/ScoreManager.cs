@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class ScoreManager : MonoBehaviour {
 	public int score;
 	public int combot;
 	public int comboMax;
 	public float currenttimerCombot;
 	public float timerCombot;
-
+	public TMP_Text scoreText;
+	public TMP_Text combotText;
 	public  int AccessAmount=0;
 	private Player player;
 	private ZombieManager zombieManager;
@@ -18,6 +19,8 @@ public class ScoreManager : MonoBehaviour {
 		zombieManager = GameObject.FindGameObjectWithTag("ZombieManager").GetComponent<ZombieManager>();
 		score=0;
 		combot=1;
+		UpdateScore();
+		UpdateCombot();
 	}
 	public void addAmmount()
 	{
@@ -33,6 +36,8 @@ public class ScoreManager : MonoBehaviour {
 	{
 		score+=1*combot;
 		combot++;
+		UpdateScore();
+		UpdateCombot();
 		timerCombot/=1.05f;
 		currenttimerCombot=timerCombot;
 		addAmmount();
@@ -45,6 +50,8 @@ public class ScoreManager : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		UpdateScore();
+		UpdateCombot();
 		if(currenttimerCombot >0f)     
         {         
             currenttimerCombot -= Time.deltaTime;     
@@ -57,7 +64,14 @@ public class ScoreManager : MonoBehaviour {
 		}     
        
 	}
-
+	public void UpdateScore()
+	{
+		scoreText.text="Score: "+score.ToString();
+	}
+	public void UpdateCombot()
+	{
+		combotText.text="Combot: "+combot.ToString();
+	}
 	private void comboUp()
 	{
 		Arme currentGun;
