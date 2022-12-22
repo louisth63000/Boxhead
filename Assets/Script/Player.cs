@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-	public int vie=100;
+	public float vie=100f;
 	public float speed;
-
+	public float maxVie=100f;
 	private float movementV;
 	private float movementH;
 
 	private int indexArme=0;
 
 	public Rigidbody2D rigidBody2D;
-
+	public Image HealthBarImage;
 	private Vector3 startPosition;
 
 	public GameObject scoreManager;
@@ -66,7 +67,7 @@ public class Player : MonoBehaviour
     {
 		movementV = Input.GetAxis("Vertical");
 		movementH = Input.GetAxis("Horizontal");
-		
+		HealthBarImage.fillAmount= vie/maxVie;
 		Vector3 mouseposition = Input.mousePosition;
 		mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
 
