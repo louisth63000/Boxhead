@@ -6,6 +6,7 @@ public class bulletRocket : MonoBehaviour
 {
     public float vie=0f;
 	public int degat=5;
+    public int scalesize=10;
 	public GameObject Scoremanager;
 	void Awake () 
 	{
@@ -16,11 +17,11 @@ public class bulletRocket : MonoBehaviour
     {
         if (col.tag != "Untagged" && col.tag != "Player")
         {
-            gameObject.transform.localScale = new Vector3(10,10,1);
+            gameObject.transform.localScale = new Vector3(scalesize,scalesize,1);
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             Debug.Log(col.tag);
         }
-		if (gameObject.transform.localScale.x == 10)
+		if (gameObject.transform.localScale.x == scalesize)
 		{
             if (col.tag == "Zombie")
             {

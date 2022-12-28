@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 	public float maxVie=100f;
 	private float movementV;
 	private float movementH;
+	public int regvie=1;
+	public float regvietime=1f;
 
 	private int indexArme=0;
 
@@ -75,24 +77,25 @@ public class Player : MonoBehaviour
 		
 		transform.up = direction;
 		transform.position = new Vector2(transform.position.x+ (movementH* speed),transform.position.y+ (movementV * speed));
-		
+		if (regvietime <0f)
+		{	
+			regvietime=2f;
+			vie= (vie >= 100f)?100f:vie+regvie;
+		}else
+		{
+			regvietime -= Time.deltaTime;
+		}
+
 		float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 		switchArme(scrollInput);
     }
 
-	void OnTriggerEnter2D(Collider2D col)
+	void  OnTriggerEnter2D(Collider2D col)
     {
 		if (col.tag == "Zombie")
 		{
 			var zombie=col.gameObject.GetComponent<Zombie>();
-			zombie.testcollision();
-			
-			if(zombie.timeattact >5)
-			{
-				zombie.timeattact=0;
-				vie-=15;
-				Debug.Log("La vie du joueur est  " + vie);
-			}
+			vie-=zombie.degat;
 		}
 	}
 }

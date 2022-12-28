@@ -26,6 +26,7 @@ public class Arme : MonoBehaviour
     void Start()
     {
         scoreManager= GameObject.FindGameObjectWithTag("Score");
+        ammoText = GameObject.Find("afficheMunition").GetComponent<TMP_Text>();
     }
 
     public virtual void fire()
@@ -35,12 +36,12 @@ public class Arme : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rapidfire+=addfire;
-        if(Input.GetAxis("Fire1") == 1 &&  rapidfire > 1 && currentAmmount > 0)
+        rapidfire -= Time.deltaTime;
+        if(Input.GetAxis("Fire1") == 1 &&  rapidfire <0f && currentAmmount > 0)
 		{
             currentAmmount -=1;
             UpdateAmmo();
-			rapidfire=0;
+			rapidfire=addfire;
 			fire();
 
 		}

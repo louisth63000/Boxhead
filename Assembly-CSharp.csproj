@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\bullet.cs" />
+     <Compile Include="Assets\Script\Demon.cs" />
      <Compile Include="Assets\Script\ShotGun.cs" />
      <Compile Include="Assets\Script\ZombieManager.cs" />
      <Compile Include="Assets\Script\bulletRocket.cs" />
@@ -48,6 +49,7 @@
      <Compile Include="Assets\Script\Player.cs" />
      <Compile Include="Assets\Script\Zombie.cs" />
      <Compile Include="Assets\Script\Mines.cs" />
+     <Compile Include="Assets\Script\bulletDemon.cs" />
      <Compile Include="Assets\Script\Arme.cs" />
      <Compile Include="Assets\Script\Rocket.cs" />
      <Compile Include="Assets\Script\Gun.cs" />

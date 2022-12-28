@@ -8,16 +8,23 @@ public class ScoreManager : MonoBehaviour {
 	public int combot=1;
 	public int comboMax=50;
 	public Image combotImage;
+
 	public float currenttimerCombot;
+	public float currenttimerBonusText;
+
 	public float timerCombot;
 	public TMP_Text scoreText;
 	public TMP_Text combotText;
+	public TMP_Text bonusText;
 	public  int AccessAmount=0;
 	private Player player;
 	private ZombieManager zombieManager;
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+		player.listArme[3].bulletprefab.GetComponent<bulletRocket>().scalesize=10;
+		player.listArme[1].bulletprefab.GetComponent<bullet>().degat =20;
+
 		zombieManager = GameObject.FindGameObjectWithTag("ZombieManager").GetComponent<ZombieManager>();
 		score=0;
 		combot=1;
@@ -30,7 +37,7 @@ public class ScoreManager : MonoBehaviour {
 		int luckspawn=Random.Range(0,20);
 		if(luckspawn ==0)
 		{
-			Debug.Log("Nouvelle Munition "+ player.listArme[indexArme].name);
+			UpdateBonus("Nouvelle Munition "+ player.listArme[indexArme].name);
 			player.listArme[indexArme].currentAmmount = (int) (player.listArme[indexArme].Ammountmax/4);
 		}
 	}
@@ -53,6 +60,13 @@ public class ScoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateCombot();
+		if(currenttimerBonusText >0f)
+		{
+			currenttimerBonusText -= Time.deltaTime;
+		}else
+		{
+			bonusText.text="";
+		}
 		if(currenttimerCombot >0f)     
         {         
             currenttimerCombot -= Time.deltaTime;     
@@ -63,7 +77,7 @@ public class ScoreManager : MonoBehaviour {
 			currenttimerCombot=timerCombot;
 
 		}     
-		combotImage.fillAmount=(float)combot/ (float)comboMax;
+		combotImage.fillAmount=(1f-(float)currenttimerCombot)/ 1f;
 	}
 	public void UpdateScore()
 	{
@@ -73,6 +87,11 @@ public class ScoreManager : MonoBehaviour {
 	{
 		combotText.text="Combot: "+combot.ToString();
 	}
+	public void UpdateBonus(string textb)
+	{
+		bonusText.text = textb;
+		currenttimerBonusText = 2f;
+	}
 	private void comboUp()
 	{
 		Arme currentGun;
@@ -80,73 +99,99 @@ public class ScoreManager : MonoBehaviour {
 		{
 			case 2:
 				currentGun= player.listArme[0];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Augmentation du stock de balle pour le  "+currentGun.Aname);
 				currentGun.Ammountmax *= 2;
 				break;
 			case 4:
 				currentGun= player.listArme[0];
+				UpdateBonus("Augmentation de la vistesse de tire pour "+currentGun.Aname);
 				Debug.Log("L'arme s'appelle df: "+currentGun.Aname);
-				currentGun.addfire = 0.007f;
+				currentGun.addfire = 0.3f;
 				break;
 			case 6:
 				currentGun= player.listArme[0];
+				UpdateBonus("Augmentation de la vistesse des balles pour "+currentGun.Aname);
 				Debug.Log("L'arme s'appelle df: "+currentGun.Aname);
 				currentGun.speedbullet = 10;
 				break;
 			case 8:
-				Debug.Log("Nouvelle Arme Uzi");
+				UpdateBonus("Nouvelle Arme Uzi");
 				currentGun= player.listArme[1];
 				currentGun.currentAmmount=currentGun.Ammountmax;
 				AccessAmount+=1;
 
 				break;
 			case 10:
-				Debug.Log("Augmentation de la vitesse  Uzi");
+				UpdateBonus("Augmentation de la vitesse des balles pour Uzi");
 				currentGun= player.listArme[1];
 				currentGun.speedbullet+=6;
 				break;
 			case 12:
 				currentGun= player.listArme[0];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Augmentation du stock de balle pour le  "+currentGun.Aname);
 				currentGun.Ammountmax *= 2;
 				break;
 			case 14:
 				currentGun= player.listArme[1];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Augmentation du stock de balle pour le  "+currentGun.Aname);
 				currentGun.Ammountmax *= 2;
 				break;
 			case 16:
 				currentGun= player.listArme[1];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Augmentation des dégats de balle pour le  "+currentGun.Aname);
 				currentGun.bulletprefab.GetComponent<bullet>().degat *=2;
 				break;
 			case 20:
 				currentGun= player.listArme[2];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Nouvelle Arme "+currentGun.Aname);
 				currentGun.currentAmmount=currentGun.Ammountmax;
 				AccessAmount+=1;
 				break;
 			case 24:
 				currentGun= player.listArme[2];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Augmentation du stock de balle pour le  "+currentGun.Aname);
 				currentGun.Ammountmax *= 2;
 				break;
 			case 32:
 				currentGun= player.listArme[2];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Augmentation des dégats de balle pour le  "+currentGun.Aname);
 				currentGun.bulletprefab.GetComponent<bullet>().degat *=2;
 				break;
 			case 35:
 				currentGun= player.listArme[3];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Nouvelle Arme "+currentGun.Aname);
 				currentGun.currentAmmount=currentGun.Ammountmax;
 				AccessAmount+=1;
 				break;
+			case 40:
+				currentGun= player.listArme[3];
+				UpdateBonus("Augmentation de la zone de dégats de balle  "+currentGun.Aname);
+				currentGun.bulletprefab.GetComponent<bulletRocket>().scalesize+=5;
+				break;
+			case 45:
+				currentGun= player.listArme[3];
+				UpdateBonus("Augmentation de la zone de dégats de balle  "+currentGun.Aname);
+				currentGun.bulletprefab.GetComponent<bulletRocket>().scalesize+=5;
+				break;
 			case 50:
 				currentGun= player.listArme[4];
-				Debug.Log("L'arme s'appelle : "+currentGun.Aname);
+				UpdateBonus("Nouvelle Arme "+currentGun.Aname);
 				currentGun.currentAmmount=currentGun.Ammountmax;
 				AccessAmount+=1;
+				break;
+			case 55:
+				currentGun= player.listArme[3];
+				UpdateBonus("Augmentation de la zone de dégats de balle  "+currentGun.Aname);
+				currentGun.bulletprefab.GetComponent<bulletRocket>().scalesize+=5;
+				break;
+			case 60:
+				currentGun= player.listArme[3];
+				UpdateBonus("Augmentation de la zone de dégats de balle  "+currentGun.Aname);
+				currentGun.bulletprefab.GetComponent<bulletRocket>().scalesize+=5;
+				break;
+			case 65:
+				player.regvie=2;
+				UpdateBonus("Regeneration de vie plus rapide");
 				break;
 			default:
 				Debug.Log("Rien");

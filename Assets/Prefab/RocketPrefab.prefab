@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vie: 5
-  degat: 25
+  degat: 50
+  scalesize: 10
   Scoremanager: {fileID: 0}
 --- !u!212 &7825003548864498107
 SpriteRenderer:
