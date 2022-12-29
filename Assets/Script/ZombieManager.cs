@@ -7,6 +7,7 @@ public class ZombieManager : MonoBehaviour {
 
 	// Use this for initialization
 	public GameObject zombieprefab;
+	public GameObject demonprefab;
 
 	private GameObject player;
 	private ScoreManager scoreManager; 
@@ -27,6 +28,9 @@ public class ZombieManager : MonoBehaviour {
 	void Start () {
 		zombieprefab.GetComponent<Zombie>().speed=2f;
 		zombieprefab.GetComponent<Zombie>().degat=5;
+		demonprefab.GetComponent<Demon>().speed=1.2f;
+		demonprefab.GetComponent<CircleCollider2D>().radius=2.4f;
+
 		player = GameObject.FindGameObjectWithTag("Player");
 		scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 		listSpawn.Add(spawn1);
@@ -50,6 +54,12 @@ public class ZombieManager : MonoBehaviour {
 				var zombie = Instantiate(zombieprefab,listSpawn[spawnRandom].position,listSpawn[spawnRandom].rotation);
 				zombie.GetComponent<Zombie>().player = player;
 				compteur+=1;
+				int spawndemon=Random.Range(0,25);
+				if(spawndemon == 0)
+				{
+					var demon = Instantiate(demonprefab,listSpawn[spawnRandom].position,listSpawn[spawnRandom].rotation);
+					demon.GetComponent<Demon>().player = player;
+				}
 			}else{
 					listZombie = GameObject.FindGameObjectsWithTag("Zombie");
 					if (listZombie.Length==0)
@@ -83,9 +93,17 @@ public class ZombieManager : MonoBehaviour {
 				scoreManager.UpdateBonus("Les zombies font deux fois plus mal");
 				zombieprefab.GetComponent<Zombie>().degat+=5;
 				break;
+			case 14:
+				scoreManager.UpdateBonus("Les Demons ont plus de portés");
+				demonprefab.GetComponent<CircleCollider2D>().radius=3f;
+				break;
 			case 15:
 				scoreManager.UpdateBonus("Les zombies vont plus vite");
 				zombieprefab.GetComponent<Zombie>().speed*=1.2f;
+				break;
+			case 18:
+				scoreManager.UpdateBonus("Les Demons sont plus rapide");
+				demonprefab.GetComponent<Demon>().speed=1.6f;
 				break;
 			case 20:
 				scoreManager.UpdateBonus("Les zombies apparaisses plus vite");

@@ -24,6 +24,7 @@ public class ScoreManager : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 		player.listArme[3].bulletprefab.GetComponent<bulletRocket>().scalesize=10;
 		player.listArme[1].bulletprefab.GetComponent<bullet>().degat =20;
+		player.listArme[2].bulletprefab.GetComponent<bullet>().degat =20;
 
 		zombieManager = GameObject.FindGameObjectWithTag("ZombieManager").GetComponent<ZombieManager>();
 		score=0;
@@ -41,9 +42,9 @@ public class ScoreManager : MonoBehaviour {
 			player.listArme[indexArme].currentAmmount = (int) (player.listArme[indexArme].Ammountmax/4);
 		}
 	}
-	public void KillZombie()
+	public void KillZombie(int score_z)
 	{
-		score+=1*combot;
+		score+=score_z*combot;
 		combot++;
 		UpdateScore();
 		UpdateCombot();

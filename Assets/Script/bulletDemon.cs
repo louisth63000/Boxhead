@@ -17,4 +17,24 @@ public class bulletDemon : MonoBehaviour
     {
         
     }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+		if (col.tag == "Zombie")
+		{
+			Zombie zombie=col.gameObject.GetComponent<Zombie>();
+			zombie.vie -=degat;
+			if(zombie.vie < 0)
+			{
+				Destroy(col.gameObject,0f);
+				
+			}
+			Destroy(gameObject,0f);
+		}
+        if (col.tag == "Player")
+		{
+			Player player=col.gameObject.GetComponent<Player>();
+			player.vie -=degat;
+			Destroy(gameObject,0f);
+		}
+    }
 }

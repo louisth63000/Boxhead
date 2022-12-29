@@ -9,6 +9,7 @@ TagManager:
   - Score
   - Mine
   - ZombieManager
+  - Demon
   layers:
   - Default
   - TransparentFX

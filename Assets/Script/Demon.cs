@@ -12,6 +12,8 @@ public class Demon : MonoBehaviour
 	public GameObject player;
     public GameObject bulletprefab;
 
+    public Animator animator;
+
     public float speedbullet;
     public Vector2 direction;
 
@@ -19,6 +21,7 @@ public class Demon : MonoBehaviour
 	public float addfire;
 
     public bool playerinrange=false;
+    public bool isdead=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,18 +31,28 @@ public class Demon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!playerinrange)
+        if(!isdead)
         {
-            transform.position = Vector2.MoveTowards(transform.position,player.transform.position, speed* Time.deltaTime);
-        }else
-        {   
-            rapidfire -= Time.deltaTime;
-            if(rapidfire <0f)
+            if((player.transform.position.x - transform.position.x) < 0)
             {
-                rapidfire=addfire;
-                direction = (Vector2)player.transform.position - (Vector2)transform.position;
-                var bullet = Instantiate(bulletprefab,gameObject.transform.position,gameObject.transform.rotation);
-                bullet.GetComponent<Rigidbody2D>().velocity = direction * speedbullet;
+                transform.eulerAngles =new Vector3(0,0,transform.eulerAngles.z);
+            }else
+            {
+                transform.eulerAngles =new Vector3(0,180,transform.eulerAngles.z);
+            }
+            if(!playerinrange)
+            {
+                transform.position = Vector2.MoveTowards(transform.position,player.transform.position, speed* Time.deltaTime);
+            }else
+            {   
+                rapidfire -= Time.deltaTime;
+                if(rapidfire <0f)
+                {
+                    rapidfire=addfire;
+                    direction = (Vector2)player.transform.position - (Vector2)transform.position;
+                    var bullet = Instantiate(bulletprefab,gameObject.transform.position,gameObject.transform.rotation);
+                    bullet.GetComponent<Rigidbody2D>().velocity = direction * speedbullet;
+                }
             }
         }
     }
