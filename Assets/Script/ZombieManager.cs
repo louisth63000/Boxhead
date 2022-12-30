@@ -25,6 +25,9 @@ public class ZombieManager : MonoBehaviour {
 	public float sumTime;
 	public int manche=1;
 
+	public AudioSource audioSource;
+	public AudioClip nouvellemanche;
+
 	void Start () {
 		zombieprefab.GetComponent<Zombie>().speed=2f;
 		zombieprefab.GetComponent<Zombie>().degat=5;
@@ -54,7 +57,7 @@ public class ZombieManager : MonoBehaviour {
 				var zombie = Instantiate(zombieprefab,listSpawn[spawnRandom].position,listSpawn[spawnRandom].rotation);
 				zombie.GetComponent<Zombie>().player = player;
 				compteur+=1;
-				int spawndemon=Random.Range(0,25);
+				int spawndemon=Random.Range(0,35);
 				if(spawndemon == 0)
 				{
 					var demon = Instantiate(demonprefab,listSpawn[spawnRandom].position,listSpawn[spawnRandom].rotation);
@@ -65,6 +68,8 @@ public class ZombieManager : MonoBehaviour {
 					if (listZombie.Length==0)
 					{
 						scoreManager.UpdateBonus("Nouvelle manche");
+						audioSource.clip =nouvellemanche;
+						audioSource.Play();
 						manche++;
 						zombieUp();
 						compteur=0;

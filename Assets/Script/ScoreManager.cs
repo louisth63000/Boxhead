@@ -19,12 +19,16 @@ public class ScoreManager : MonoBehaviour {
 	public  int AccessAmount=0;
 	private Player player;
 	private ZombieManager zombieManager;
+
+	public AudioSource audioSource;
+	public AudioClip nouveauBonus;
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-		player.listArme[3].bulletprefab.GetComponent<bulletRocket>().scalesize=10;
+		player.listArme[3].bulletprefab.GetComponent<bulletRocket>().scalesize=12;
 		player.listArme[1].bulletprefab.GetComponent<bullet>().degat =20;
 		player.listArme[2].bulletprefab.GetComponent<bullet>().degat =20;
+		player.listArme[4].bulletprefab.GetComponent<Mine>().scalesize=14;
 
 		zombieManager = GameObject.FindGameObjectWithTag("ZombieManager").GetComponent<ZombieManager>();
 		score=0;
@@ -102,97 +106,146 @@ public class ScoreManager : MonoBehaviour {
 				currentGun= player.listArme[0];
 				UpdateBonus("Augmentation du stock de balle pour le  "+currentGun.Aname);
 				currentGun.Ammountmax *= 2;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 4:
 				currentGun= player.listArme[0];
 				UpdateBonus("Augmentation de la vistesse de tire pour "+currentGun.Aname);
 				Debug.Log("L'arme s'appelle df: "+currentGun.Aname);
 				currentGun.addfire = 0.3f;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 6:
 				currentGun= player.listArme[0];
 				UpdateBonus("Augmentation de la vistesse des balles pour "+currentGun.Aname);
 				Debug.Log("L'arme s'appelle df: "+currentGun.Aname);
 				currentGun.speedbullet = 10;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 8:
 				UpdateBonus("Nouvelle Arme Uzi");
 				currentGun= player.listArme[1];
 				currentGun.currentAmmount=currentGun.Ammountmax;
 				AccessAmount+=1;
-
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 10:
 				UpdateBonus("Augmentation de la vitesse des balles pour Uzi");
 				currentGun= player.listArme[1];
 				currentGun.speedbullet+=6;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 12:
 				currentGun= player.listArme[0];
 				UpdateBonus("Augmentation du stock de balle pour le  "+currentGun.Aname);
 				currentGun.Ammountmax *= 2;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 14:
 				currentGun= player.listArme[1];
 				UpdateBonus("Augmentation du stock de balle pour le  "+currentGun.Aname);
 				currentGun.Ammountmax *= 2;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 16:
 				currentGun= player.listArme[1];
 				UpdateBonus("Augmentation des dégats de balle pour le  "+currentGun.Aname);
 				currentGun.bulletprefab.GetComponent<bullet>().degat *=2;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 20:
 				currentGun= player.listArme[2];
 				UpdateBonus("Nouvelle Arme "+currentGun.Aname);
 				currentGun.currentAmmount=currentGun.Ammountmax;
 				AccessAmount+=1;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 24:
 				currentGun= player.listArme[2];
 				UpdateBonus("Augmentation du stock de balle pour le  "+currentGun.Aname);
 				currentGun.Ammountmax *= 2;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 32:
 				currentGun= player.listArme[2];
 				UpdateBonus("Augmentation des dégats de balle pour le  "+currentGun.Aname);
 				currentGun.bulletprefab.GetComponent<bullet>().degat *=2;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 35:
 				currentGun= player.listArme[3];
 				UpdateBonus("Nouvelle Arme "+currentGun.Aname);
 				currentGun.currentAmmount=currentGun.Ammountmax;
 				AccessAmount+=1;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 40:
 				currentGun= player.listArme[3];
 				UpdateBonus("Augmentation de la zone de dégats de balle  "+currentGun.Aname);
 				currentGun.bulletprefab.GetComponent<bulletRocket>().scalesize+=5;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 45:
 				currentGun= player.listArme[3];
 				UpdateBonus("Augmentation de la zone de dégats de balle  "+currentGun.Aname);
 				currentGun.bulletprefab.GetComponent<bulletRocket>().scalesize+=5;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 50:
 				currentGun= player.listArme[4];
 				UpdateBonus("Nouvelle Arme "+currentGun.Aname);
 				currentGun.currentAmmount=currentGun.Ammountmax;
 				AccessAmount+=1;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 55:
 				currentGun= player.listArme[3];
 				UpdateBonus("Augmentation de la zone de dégats de balle  "+currentGun.Aname);
 				currentGun.bulletprefab.GetComponent<bulletRocket>().scalesize+=5;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 60:
 				currentGun= player.listArme[3];
 				UpdateBonus("Augmentation de la zone de dégats de balle  "+currentGun.Aname);
 				currentGun.bulletprefab.GetComponent<bulletRocket>().scalesize+=5;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			case 65:
-				player.regvie=2;
+				player.regvie=4;
 				UpdateBonus("Regeneration de vie plus rapide");
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
+				break;
+			case 70:
+				currentGun= player.listArme[4];
+				UpdateBonus("Augmentation de la zone de dégats de la "+currentGun.Aname);
+				currentGun.bulletprefab.GetComponent<Mine>().scalesize+=5;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
+				break;
+			case 75:
+				currentGun= player.listArme[4];
+				UpdateBonus("Augmentation de la zone de dégats de la "+currentGun.Aname);
+				currentGun.bulletprefab.GetComponent<Mine>().scalesize+=5;
+				audioSource.clip =nouveauBonus;
+				audioSource.Play();
 				break;
 			default:
 				Debug.Log("Rien");

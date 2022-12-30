@@ -10,13 +10,15 @@ public class Mine : MonoBehaviour
 	public bool collision=false;
     public bool explosion=false;
     public float explosiontime=2f;
-	
+	public float range=2.4f;
+    public int scalesize=14;
     
     void OnTriggerStay2D(Collider2D col)
     {
-		if (col.tag == "Zombie")
+		if (col.tag == "Zombie" || col.tag == "Demon")
 		{
             collision = true ;
+            
 		}
         if (explosion == true)
 		{
@@ -40,14 +42,16 @@ public class Mine : MonoBehaviour
             {
                 Player player=col.gameObject.GetComponent<Player>();
                 player.vie -=degat;
+                player.animator.Play("HitPlayer");
             }
             else if(col.tag == "Mine")
             {
-                Debug.Log("TEST");
+               
                 col.gameObject.GetComponent<Mine>().explosion = true;
                 
             }else if (col.tag == "Demon")
             {
+                
                 Demon demon=col.gameObject.transform.parent.GetComponent<Demon>();
                if(demon.isdead == false)
                 {
@@ -79,6 +83,8 @@ public class Mine : MonoBehaviour
             }else
             {
                 explosion = true;
+                gameObject.transform.localScale = new Vector3(scalesize,scalesize,1);
+                gameObject.GetComponent<CircleCollider2D>().radius=range/scalesize;
                 Destroy(gameObject,1f);
             }   
         }

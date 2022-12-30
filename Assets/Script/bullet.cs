@@ -8,6 +8,9 @@ public class bullet : MonoBehaviour {
 	public float vie=0f;
 	public int degat=5;
 	public GameObject Scoremanager;
+	
+	public AudioSource audioSource;
+	public AudioClip hitsound;
 	void Awake () 
 	{
 		Destroy(gameObject,vie);	
@@ -17,6 +20,8 @@ public class bullet : MonoBehaviour {
     {
 		if (col.tag == "Zombie")
 		{
+			audioSource.clip =hitsound;
+			audioSource.Play();
 			Zombie zombie=col.gameObject.GetComponent<Zombie>();
 			if (zombie.isdead == false)
 			{
@@ -34,6 +39,8 @@ public class bullet : MonoBehaviour {
 			Destroy(gameObject,0f);
 		}else if (col.tag == "Demon")
 		{
+			audioSource.clip =hitsound;
+			audioSource.Play();
 			Demon demon=col.gameObject.transform.parent.GetComponent<Demon>();
 			if(demon.isdead == false)
 			{

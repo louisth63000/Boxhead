@@ -23,8 +23,10 @@ public class bulletDemon : MonoBehaviour
 		{
 			Zombie zombie=col.gameObject.GetComponent<Zombie>();
 			zombie.vie -=degat;
+			zombie.animator.Play("Hit");
 			if(zombie.vie < 0)
 			{
+				zombie.animator.SetBool("Dead",true);
 				Destroy(col.gameObject,0f);
 				
 			}
@@ -32,8 +34,14 @@ public class bulletDemon : MonoBehaviour
 		}
         if (col.tag == "Player")
 		{
+			
 			Player player=col.gameObject.GetComponent<Player>();
+			
 			player.vie -=degat;
+			if(player.vie > 0)
+			{
+				player.animator.Play("HitPlayer");
+			}
 			Destroy(gameObject,0f);
 		}
     }
