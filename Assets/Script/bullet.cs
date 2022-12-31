@@ -36,7 +36,7 @@ public class bullet : MonoBehaviour {
 					
 				}
 			}
-			Destroy(gameObject,0f);
+			Destroy(gameObject,0.05f);
 		}else if (col.tag == "Demon")
 		{
 			audioSource.clip =hitsound;
@@ -55,8 +55,12 @@ public class bullet : MonoBehaviour {
 					
 				}
 			}
-			Destroy(gameObject,0f);
+			Destroy(gameObject,0.05f);
+		}else if(col.tag == "Mur")
+		{
+			Destroy(gameObject,0.05f);
 		}
+		
     }
 	// Update is called once per frame
 }

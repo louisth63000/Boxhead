@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -21,16 +22,22 @@ public class Player : MonoBehaviour
 	private Vector3 startPosition;
 	public Animator animator;
 
-	public GameObject scoreManager;
+	public ScoreManager scoreManager;
 	public AudioSource audioSource;
 	public AudioClip mort;
+	public AudioClip hitzombie;
+	public AudioClip hitDemon;
 
 	public List<Arme> listArme=new List<Arme>();
+
+	public TMP_Text Vietxt;
+	public TMP_Text Armetxt;
+
 
     void Start()
     {
         startPosition = transform.position;
-		scoreManager= GameObject.FindGameObjectWithTag("Score");
+		scoreManager= GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreManager>();
     }
 
 	void switchArme(float scrollInput)
@@ -64,18 +71,37 @@ public class Player : MonoBehaviour
 					listArme[indexArme - 1].Desactive();
 				}
 			}
-			
+			Armetxt.text = listArme[indexArme].Aname;
 		}
 	}
+	public void Restart()
+	{
+		animator.SetBool("Dead",false);
+		vie= 100;
+		gameObject.transform.position = new Vector3(0.5847f,-0.4866f,-0.1f);
+		scoreManager.Restart();
+		scoreManager.zombieManager.Restart();
 
+		listArme[indexArme].Desactive();
+		indexArme=0;
+		listArme[indexArme].Active();
+		Armetxt.text = listArme[indexArme].Aname;
+		isdead=false;
+	}
     // Update is called once per frame
     void Update()
     {
+		if (Input.GetKey("r"))
+		{
+			Restart();
+		}
+		Vietxt.text=(vie < 0)?"Vie : 0":"Vie : "+vie;
+		HealthBarImage.fillAmount= vie/maxVie;
 		if (vie< 0)
 		{
 			animator.SetBool("Dead",true);
 			listArme[indexArme].Desactive();
-			HealthBarImage.fillAmount= vie/maxVie;
+			
 			if(isdead == false)
 			{
 				audioSource.clip =mort;
@@ -89,7 +115,6 @@ public class Player : MonoBehaviour
 			movementH = Input.GetAxis("Horizontal");
 			bool isstamp=(movementV == 0 && movementH == 0)?true : false;
 			animator.SetBool("Stand",isstamp);
-			HealthBarImage.fillAmount= vie/maxVie;
 			Vector3 mouseposition = Input.mousePosition;
 			mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
 
@@ -115,20 +140,25 @@ public class Player : MonoBehaviour
     {
 		if (col.tag == "Zombie")
 		{
-			if(vie > 0)
+			var zombie=col.gameObject.GetComponent<Zombie>();
+			if(vie > 0 && zombie.vie > 0)
 			{
 				animator.Play("HitPlayer");
+				audioSource.clip =hitzombie;
+				audioSource.Play();
 			}
-			var zombie=col.gameObject.GetComponent<Zombie>();
-			vie-=zombie.degat;
+			vie-=(zombie.vie < 0)?0:zombie.degat;
 		}else if(col.tag == "Demon")
 		{
-			if(vie>0)
+			var demon=col.transform.parent.gameObject.GetComponent<Demon>();
+			if(vie>0 &&  demon.vie > 0)
 			{
 				animator.Play("HitPlayer");
+				audioSource.clip =hitDemon;
+				audioSource.Play();
 			}
-			var demon=col.transform.parent.gameObject.GetComponent<Demon>();
-			vie-=demon.degat;
+			
+			vie-=(demon.vie <0)?0:demon.degat;
 		}
 	}
 }

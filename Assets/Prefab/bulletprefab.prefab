@@ -163,10 +163,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vie: 3
-  degat: 34
+  degat: 20
   Scoremanager: {fileID: 0}
   audioSource: {fileID: 6137936068397484005}
-  hitsound: {fileID: 8300000, guid: 0bddcb411d826e14bb26d40ae45d8e22, type: 3}
+  hitsound: {fileID: 8300000, guid: f9636fbf5ea5f2145a3f078ebb416791, type: 3}
 --- !u!82 &6137936068397484005
 AudioSource:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0

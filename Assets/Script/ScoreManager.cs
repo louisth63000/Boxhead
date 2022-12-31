@@ -18,7 +18,7 @@ public class ScoreManager : MonoBehaviour {
 	public TMP_Text bonusText;
 	public  int AccessAmount=0;
 	private Player player;
-	private ZombieManager zombieManager;
+	public ZombieManager zombieManager;
 
 	public AudioSource audioSource;
 	public AudioClip nouveauBonus;
@@ -35,6 +35,46 @@ public class ScoreManager : MonoBehaviour {
 		combot=1;
 		UpdateScore();
 		UpdateCombot();
+	}
+	public void Restart()
+	{
+		player.listArme[3].bulletprefab.GetComponent<bulletRocket>().scalesize=12;
+		player.listArme[1].bulletprefab.GetComponent<bullet>().degat =20;
+		player.listArme[2].bulletprefab.GetComponent<bullet>().degat =20;
+		player.listArme[4].bulletprefab.GetComponent<Mine>().scalesize=14;
+		
+		player.listArme[0].Ammountmax=35;
+		player.listArme[0].addfire=0.4f;
+		player.listArme[0].speedbullet=8;
+		player.listArme[0].currentAmmount=player.listArme[0].Ammountmax;
+		
+		player.listArme[1].Ammountmax=300;
+		player.listArme[1].addfire=0.1f;
+		player.listArme[1].speedbullet=6;
+		player.listArme[1].currentAmmount=0;
+
+		player.listArme[2].Ammountmax=25;
+		player.listArme[2].addfire=0.5f;
+		player.listArme[2].speedbullet=8;
+		player.listArme[2].currentAmmount=0;
+		
+		player.listArme[3].Ammountmax=25;
+		player.listArme[3].addfire=0.7f;
+		player.listArme[3].speedbullet=15;
+		player.listArme[3].currentAmmount=0;
+		
+		player.listArme[4].Ammountmax=10;
+		player.listArme[4].addfire=0.5f;
+		player.listArme[4].speedbullet=5;
+		player.listArme[4].currentAmmount=0;
+
+		score =0;
+		combot =0;
+		comboMax =0;
+		AccessAmount=0;
+		UpdateScore();
+		UpdateCombot();
+		
 	}
 	public void addAmmount()
 	{

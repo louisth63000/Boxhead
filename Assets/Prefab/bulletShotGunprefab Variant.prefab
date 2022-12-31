@@ -73,7 +73,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hitsound
       value: 
-      objectReference: {fileID: 8300000, guid: 6b7eaf4532a2f614595ad58d2b86efc4, type: 3}
+      objectReference: {fileID: 8300000, guid: f9636fbf5ea5f2145a3f078ebb416791, type: 3}
     - target: {fileID: 114865281118888698, guid: 2a449c8afa438db4ab186c35a640aae6,
         type: 3}
       propertyPath: audioSource

@@ -12,6 +12,9 @@ public class Mine : MonoBehaviour
     public float explosiontime=2f;
 	public float range=2.4f;
     public int scalesize=14;
+
+    public AudioSource audioSource;
+	public AudioClip hitsound;
     
     void OnTriggerStay2D(Collider2D col)
     {
@@ -82,10 +85,16 @@ public class Mine : MonoBehaviour
                 explosiontime -= Time.deltaTime;     
             }else
             {
+                if(explosion == false)
+                {
+                    audioSource.clip =hitsound;
+			        audioSource.Play();
+                }
                 explosion = true;
                 gameObject.transform.localScale = new Vector3(scalesize,scalesize,1);
                 gameObject.GetComponent<CircleCollider2D>().radius=range/scalesize;
                 Destroy(gameObject,1f);
+               
             }   
         }
     }

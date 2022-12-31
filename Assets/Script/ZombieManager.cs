@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 
 public class ZombieManager : MonoBehaviour {
 
@@ -28,6 +29,8 @@ public class ZombieManager : MonoBehaviour {
 	public AudioSource audioSource;
 	public AudioClip nouvellemanche;
 
+	public TMP_Text Manchetxt;
+
 	void Start () {
 		zombieprefab.GetComponent<Zombie>().speed=2f;
 		zombieprefab.GetComponent<Zombie>().degat=5;
@@ -42,9 +45,42 @@ public class ZombieManager : MonoBehaviour {
 		listSpawn.Add(spawn4);
 		compteur=0;
 		compteurMax=10;
-
+		Manchetxt.text="Manche : "+manche;
 	}
-	
+	public void Restart()
+	{
+		zombieprefab.GetComponent<Zombie>().speed=2f;
+		zombieprefab.GetComponent<Zombie>().degat=5;
+		demonprefab.GetComponent<Demon>().speed=1.2f;
+		demonprefab.GetComponent<CircleCollider2D>().radius=2.4f;
+		spawnTime = 0.4f;
+		GameObject[] zombies=GameObject.FindGameObjectsWithTag("Zombie");
+		GameObject[] demons=GameObject.FindGameObjectsWithTag("Demon");
+
+		GameObject[] mines=GameObject.FindGameObjectsWithTag("Mine");
+		GameObject[] rockets=GameObject.FindGameObjectsWithTag("Rocket");
+
+		for (int i = 0; i < zombies.Length; i++)
+		{
+			Destroy(zombies[i],0f);
+		}
+		for (int i = 0; i < mines.Length; i++)
+		{
+			Destroy(mines[i],0f);
+		}
+		for (int i = 0; i < rockets.Length; i++)
+		{
+			Destroy(rockets[i],0f);
+		}
+		for (int i = 0; i < demons.Length; i++)
+		{
+			Destroy(demons[i].transform.parent.gameObject,0f);
+		}
+		compteur=0;
+		compteurMax=10;
+		manche=1;
+		Manchetxt.text="Manche : "+manche;
+	}
 	// Update is called once per frame
 	void Update () {
 		if (sumTime <0f)
@@ -71,6 +107,7 @@ public class ZombieManager : MonoBehaviour {
 						audioSource.clip =nouvellemanche;
 						audioSource.Play();
 						manche++;
+						Manchetxt.text="Manche : "+manche;
 						zombieUp();
 						compteur=0;
 						compteurMax= (int) (compteurMax* 1.4f);

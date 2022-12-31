@@ -10,6 +10,9 @@ public class bulletRocket : MonoBehaviour
 	public GameObject Scoremanager;
     public Sprite explosion;
 
+    public AudioSource audioSource;
+	public AudioClip hitsound;
+
 	void Awake () 
 	{
 		Destroy(gameObject,vie);	
@@ -17,13 +20,19 @@ public class bulletRocket : MonoBehaviour
 	
 	void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag != "Untagged" && col.tag != "Player")
+        if (col.tag != "Untagged" && col.tag != "Player" && col.tag != "Rocket")
         {
+            audioSource.clip =hitsound;
+            if (gameObject.transform.localScale.x != scalesize)
+            {
+                audioSource.Play();
+            }
             gameObject.transform.localScale = new Vector3(scalesize,scalesize,1);
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             gameObject.GetComponent<SpriteRenderer>().sprite =explosion;
             gameObject.GetComponent<SpriteRenderer>().color =new Color(255,255,255,255);
             gameObject.GetComponent<CircleCollider2D>().radius=0.18f;
+            
         }
 		if (gameObject.transform.localScale.x == scalesize)
 		{
@@ -43,13 +52,11 @@ public class bulletRocket : MonoBehaviour
                         
                     }
                 }
-                Destroy(gameObject,0.2f);
             }else if(col.tag == "Player")
             {
                 Player player=col.gameObject.GetComponent<Player>();
                 player.vie -=degat;
                 player.animator.Play("HitPlayer");
-                Destroy(gameObject,0.2f);
             }else if (col.tag == "Demon")
             {
                 Demon demon=col.gameObject.transform.parent.GetComponent<Demon>();
@@ -66,7 +73,7 @@ public class bulletRocket : MonoBehaviour
                         
                     }
                 }
-                Destroy(gameObject,0.2f);
+
             }
 		}
     }
