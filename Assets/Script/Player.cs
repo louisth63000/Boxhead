@@ -14,14 +14,15 @@ public class Player : MonoBehaviour
 	public int regvie=1;
 	public float regvietime=1f;
 	private bool isdead=false;
-
+	public Image ObjetTransparent;
+	public float alpha=100f;
 	private int indexArme=0;
-
+	public TMP_Text finPartie;
 	public Rigidbody2D rigidBody2D;
 	public Image HealthBarImage;
 	private Vector3 startPosition;
 	public Animator animator;
-
+	public TMP_Text Rejouer;
 	public ScoreManager scoreManager;
 	public AudioSource audioSource;
 	public AudioClip mort;
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour
 		{
 			animator.SetBool("Dead",true);
 			listArme[indexArme].Desactive();
-			
+			changeAlpha(ObjetTransparent, finPartie, Rejouer);
 			if(isdead == false)
 			{
 				audioSource.clip =mort;
@@ -134,8 +135,14 @@ public class Player : MonoBehaviour
 			float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 			switchArme(scrollInput);
 		}
+	
     }
-
+	void changeAlpha(Image image, TMP_Text text, TMP_Text rejouer)
+    {
+        image.color = new Color32(0,0,0,255);
+		text.color = new Color32(255,0,0,255);
+		rejouer.color=new Color32(255,0,0,255);
+    }
 	void  OnTriggerEnter2D(Collider2D col)
     {
 		if (col.tag == "Zombie")
